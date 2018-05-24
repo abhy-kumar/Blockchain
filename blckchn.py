@@ -1,28 +1,17 @@
-#uses Flask and Requests
+import hashlib as hasher
 
-class blockchain(object):
-    def __init__(self):
-        self.chain = []
-        self.trans = []
-
-    def new_block(self):
-        pass
-
-    def new_trans(self,sender,rec,amount):
-        self.trans.append
-        ({
-            'sender': sender,
-            'recipient': rec,
-            'amount': amount,
-        })
-
-        return self.last_block['index'] + 1
-
-    @staticmethod
-    def hash(block):
-        pass
-
-    @property
-    def last_block(self):
-        pass
-
+class Block:
+  def __init__(self, index, timestamp, data, previous_hash):
+    self.index = index
+    self.timestamp = timestamp
+    self.data = data
+    self.previous_hash = previous_hash
+    self.hash = self.hash_block()
+  
+  def hash_block(self):
+    sha = hasher.sha256()
+    sha.update(str(self.index) + 
+               str(self.timestamp) + 
+               str(self.data) + 
+               str(self.previous_hash))
+    return sha.hexdigest()
